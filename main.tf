@@ -5,6 +5,7 @@ module "label" {
   name       = "${var.name}"
   attributes = "${var.attributes}"
   delimiter  = "${var.delimiter}"
+  tags       = "${var.tags}"
 }
 
 # Defines a user that should be able to write to you test bucket
