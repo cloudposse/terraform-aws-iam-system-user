@@ -19,5 +19,3 @@ resource "aws_iam_user" "default" {
 resource "aws_iam_access_key" "default" {
   user = "${aws_iam_user.default.name}"
 }
-
-

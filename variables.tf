@@ -22,10 +22,10 @@ variable "delimiter" {
 
 variable "force_destroy" {
   description = "Destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices."
-  default = "false"
+  default     = "false"
 }
 
 variable "path" {
   description = "Path in which to create the user"
-  default = "/"
+  default     = "/"
 }
