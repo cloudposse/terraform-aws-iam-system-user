@@ -3,9 +3,8 @@ module "label" {
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "${var.name}"
-  delimiter  = "${var.delimiter}"
   attributes = "${var.attributes}"
-  tags       = "${var.tags}"
+  delimiter  = "${var.delimiter}"
 }
 
 # Defines a user that should be able to write to you test bucket
