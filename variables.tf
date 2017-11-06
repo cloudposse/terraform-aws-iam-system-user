@@ -29,3 +29,13 @@ variable "path" {
   description = "Path in which to create the user"
   default     = "/"
 }
+
+variable "create_user" {
+  description = "Flag for creation user"
+  default     = "true"
+}
+
+variable "policy" {
+  description = "User policy in json format"
+  default     = ""
+}
