@@ -6,12 +6,12 @@ module "label" {
   attributes = "${var.attributes}"
   delimiter  = "${var.delimiter}"
   tags       = "${var.tags}"
-  enabled    = "${var.create_user}"
+  enabled    = "${var.enabled}"
 }
 
 # Defines a user that should be able to write to you test bucket
 resource "aws_iam_user" "default" {
-  count         = "${var.create_user == true ? 1 : 0}"
+  count         = "${var.enabled == true ? 1 : 0}"
   name          = "${module.label.id}"
   path          = "${var.path}"
   force_destroy = "${var.force_destroy}"
@@ -19,7 +19,7 @@ resource "aws_iam_user" "default" {
 
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
-  count = "${var.create_user == true ? 1 : 0}"
+  count = "${var.enabled == true ? 1 : 0}"
   user  = "${aws_iam_user.default.name}"
 }
 

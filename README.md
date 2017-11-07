@@ -64,7 +64,7 @@ module "fluentd_user" {
 | `delimiter`     |   `-`   | Delimiter to be used between `name`, `namespace`, `stage`, `arguments`, etc.                |    No    |
 | `force_destroy` | `false` | Destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. |    No    |
 | `path`          |   `/`   | Path in which to create the user                                                            |    No    |
-| `create_user`   | `true`  | Flag for creation user                                                                      |    No    |
+| `enabled`       | `true`  | Flag for creation user                                                                      |    No    |
 | `policy`        |   ``    | User policy in `json` format                                                                |    No    |
 
 ## Outputs

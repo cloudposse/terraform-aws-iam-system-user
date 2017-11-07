@@ -30,8 +30,8 @@ variable "path" {
   default     = "/"
 }
 
-variable "create_user" {
-  description = "Flag for creation user"
+variable "enabled" {
+  description = "Flag for creation user. Set to false if necessary skip run of module"
   default     = "true"
 }
 
