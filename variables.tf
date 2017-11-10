@@ -29,3 +29,13 @@ variable "path" {
   description = "Path in which to create the user"
   default     = "/"
 }
+
+variable "enabled" {
+  description = "Flag for creation user. Set to false if necessary skip run of module"
+  default     = "true"
+}
+
+variable "policy" {
+  description = "User policy in json format"
+  default     = ""
+}
