@@ -9,10 +9,12 @@ variable "stage" {
 }
 
 variable "attributes" {
+  type    = "list"
   default = []
 }
 
 variable "tags" {
+  type    = "map"
   default = {}
 }
 
@@ -31,7 +33,7 @@ variable "path" {
 }
 
 variable "enabled" {
-  description = "Flag for creation user. Set to false if necessary skip run of module"
+  description = "Set to false to prevent the module from creating any resources"
   default     = "true"
 }
 
