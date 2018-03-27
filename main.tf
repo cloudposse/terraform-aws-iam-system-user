@@ -24,7 +24,7 @@ resource "aws_iam_access_key" "default" {
 }
 
 resource "aws_iam_user_policy" "default" {
-  count  = "${var.policy != "" ? 1 : 0}"
+  count  = "${(var.policy != "") && (var.enabled == "true") ? 1 : 0}"
   name   = "${module.label.id}"
   user   = "${element(aws_iam_user.default.*.name, 0)}"
   policy = "${var.policy}"
