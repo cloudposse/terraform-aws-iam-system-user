@@ -1,5 +1,5 @@
 output "user_name" {
-  value = "${aws_iam_user.default.name}"
+  value = "${ var.enabled == "true" ? aws_iam_user.default.name : 0}"
 }
 
 output "user_arn" {
