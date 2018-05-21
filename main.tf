@@ -22,10 +22,3 @@ resource "aws_iam_access_key" "default" {
   count = "${var.enabled == "true" ? 1 : 0}"
   user  = "${aws_iam_user.default.name}"
 }
-
-resource "aws_iam_user_policy" "default" {
-  count  = "${var.policy != "" ? 1 : 0}"
-  name   = "${module.label.id}"
-  user   = "${aws_iam_user.default.name}"
-  policy = "${var.policy}"
-}

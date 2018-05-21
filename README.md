@@ -50,7 +50,13 @@ module "fluentd_user" {
   namespace = "cp"
   stage     = "dev"
   name      = "fluentd"
-  policy    = "${data.aws_iam_policy_document.fluentd_user_policy.json}"
+}
+
+
+resource "aws_iam_user_policy" "default" {
+  name   = "${module.fluentd_user.user_name}"
+  user   = "${module.fluentd_user.user_name}"
+  policy = "${data.aws_iam_policy_document.fluentd_user_policy.json}"
 }
 ```
 
@@ -68,7 +74,6 @@ module "fluentd_user" {
 | `force_destroy` | `false` | Destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. |    No    |
 | `path`          |   `/`   | Path in which to create the user                                                            |    No    |
 | `enabled`       | `true`  | Set to `false` to prevent the module from creating any resources                            |    No    |
-| `policy`        |   ``    | User policy in `json` format                                                                |    No    |
 
 
 ## Outputs
