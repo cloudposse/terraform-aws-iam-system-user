@@ -1,0 +1,124 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: terraform-aws-iam-system-user
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: "APACHE2"
+
+# Canonical GitHub repo
+github_repo: cloudposse/terraform-aws-iam-system-user
+
+# Badges to display
+badges:
+  - name: "Build Status"
+    image: "https://travis-ci.org/cloudposse/terraform-aws-iam-system-user.svg?branch=master"
+    url: "https://travis-ci.org/cloudposse/terraform-aws-iam-system-user"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg"
+    url: "https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+related:
+  - name: "terraform-aws-iam-s3-user"
+    description: "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user read/write/delete access to the objects in an S3 bucket"
+    url: "https://github.com/cloudposse/terraform-aws-iam-s3-user"
+  - name: "terraform-aws-iam-assumed-roles"
+    description: "Terraform Module for Assumed Roles on AWS with IAM Groups Requiring MFA"
+    url: "https://github.com/cloudposse/terraform-aws-iam-assumed-roles"
+  - name: "terraform-aws-ssm-iam-role"
+    description: "Terraform module to provision an IAM role with configurable permissions to access SSM Parameter Store"
+    url: "https://github.com/cloudposse/terraform-aws-ssm-iam-role"
+  - name: "terraform-aws-iam-chamber-user"
+    description: "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that cannot leverage AWS IAM Instance Profiles"
+    url: "https://github.com/cloudposse/terraform-aws-iam-chamber-user"
+  - name: "terraform-aws-lb-s3-bucket"
+    description: "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access logs"
+    url: "https://github.com/cloudposse/terraform-aws-lb-s3-bucket"
+
+# Short description of this project
+description: |-
+  Terraform Module to provision a basic IAM system user suitable for CI/CD Systems
+  (_e.g._ TravisCI, CircleCI) or systems which are *external* to AWS that cannot leverage [AWS IAM Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html).
+
+  We do not recommend creating IAM users this way for any other purpose.
+
+# How to use this project
+usage: |-
+  ### Simple usage
+
+  ```hcl
+  module "circleci" {
+    source     = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
+    namespace  = "cp"
+    stage      = "circleci"
+    name       = "assets"
+  }
+  ```
+
+  ### Full usage
+
+  ```hcl
+  data "aws_iam_policy_document" "fluentd_user_policy" {
+    statement {
+      actions = [
+        "logs:DescribeDestinations",
+        "logs:DescribeExportTasks",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams",
+        "logs:DescribeMetricFilters",
+        "logs:DescribeSubscriptionFilters",
+        "logs:FilterLogEvents",
+        "logs:GetLogEvents",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams",
+        "logs:CreateLogStream",
+        "logs:DeleteLogStream",
+      ]
+
+      resources = ["*"]
+    }
+  }
+
+  module "fluentd_user" {
+    source    = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
+    namespace = "cp"
+    stage     = "dev"
+    name      = "fluentd"
+  }
+
+
+  resource "aws_iam_user_policy" "default" {
+    name   = "${module.fluentd_user.user_name}"
+    user   = "${module.fluentd_user.user_name}"
+    policy = "${data.aws_iam_policy_document.fluentd_user_policy.json}"
+  }
+  ```
+
+include:
+  - "docs/targets.md"
+  - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Erik Osterman"
+    github: "osterman"
+  - name: "Igor Rodionov"
+    github: "goruha"
+  - name: "Andriy Knysh"
+    github: "aknysh"
+  - name: "Vladimir"
+    github: "SweetOps"
+  - name: "Konstantin B"
+    github: "comeanother"

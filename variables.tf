@@ -1,11 +1,13 @@
-variable "name" {}
+variable "name" {
+  description = "The Name of the application or solution  (e.g. `bastion` or `portal`)"
+}
 
 variable "namespace" {
-  default = ""
+  description = "Namespace (e.g. `cp` or `cloudposse`)"
 }
 
 variable "stage" {
-  default = ""
+  description = "Stage (e.g. `prod`, `dev`, `staging`)"
 }
 
 variable "attributes" {
@@ -14,12 +16,15 @@ variable "attributes" {
 }
 
 variable "tags" {
-  type    = "map"
-  default = {}
+  type        = "map"
+  default     = {}
+  description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`)"
 }
 
 variable "delimiter" {
-  default = "-"
+  type        = "string"
+  default     = "-"
+  description = "Delimiter to be used between `name`, `namespace`, `stage`, etc."
 }
 
 variable "force_destroy" {
