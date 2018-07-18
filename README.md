@@ -29,8 +29,6 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 ## Usage
 
-### Simple usage
-
 ```hcl
 module "circleci" {
   source     = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
@@ -40,7 +38,10 @@ module "circleci" {
 }
 ```
 
-### Full usage
+
+
+
+## Examples
 
 ```hcl
 data "aws_iam_policy_document" "fluentd_user_policy" {
@@ -80,9 +81,6 @@ resource "aws_iam_user_policy" "default" {
   policy = "${data.aws_iam_policy_document.fluentd_user_policy.json}"
 }
 ```
-
-
-
 
 
 

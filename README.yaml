@@ -54,8 +54,6 @@ description: |-
 
 # How to use this project
 usage: |-
-  ### Simple usage
-
   ```hcl
   module "circleci" {
     source     = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
@@ -65,8 +63,7 @@ usage: |-
   }
   ```
 
-  ### Full usage
-
+examples: |-
   ```hcl
   data "aws_iam_policy_document" "fluentd_user_policy" {
     statement {
