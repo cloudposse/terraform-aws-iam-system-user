@@ -22,3 +22,16 @@ resource "aws_iam_access_key" "default" {
   count = "${var.enabled == "true" ? 1 : 0}"
   user  = "${aws_iam_user.default.name}"
 }
+
+resource "aws_iam_role" "default" {
+  count = "${var.enabled == "true" ? 1 : 0}"
+  name = "${module.label.id}"
+}
+
+# Defines a user that should be able to write to you test bucket
+resource "aws_iam_user" "default" {
+  count         = "${var.enabled == "true" ? 1 : 0}"
+  name          = "${module.label.id}"
+  path          = "${var.path}"
+  force_destroy = "${var.force_destroy}"
+}

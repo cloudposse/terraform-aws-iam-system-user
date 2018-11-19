@@ -8,6 +8,16 @@ output "user_arn" {
   description = "The ARN assigned by AWS for this user"
 }
 
+output "role_name" {
+  value       = "${join("", aws_iam_role.default.*.name)}"
+  description = "Normalized IAM role attached to the user"
+}
+
+output "role_arn" {
+  value       = "${join("", aws_iam_role.default.*.arn)}"
+  description = "ARN IAM role attached to the user"
+}
+
 output "user_unique_id" {
   value       = "${join("", aws_iam_user.default.*.unique_id)}"
   description = "The unique ID assigned by AWS"
