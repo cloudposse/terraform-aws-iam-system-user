@@ -18,6 +18,8 @@
 | Name | Description |
 |------|-------------|
 | access_key_id | The access key ID |
+| role_arn | ARN IAM role attached to the user |
+| role_name | Normalized IAM role attached to the user |
 | secret_access_key | The secret access key. This will be written to the state file in plain-text |
 | user_arn | The ARN assigned by AWS for this user |
 | user_name | Normalized IAM user name |
