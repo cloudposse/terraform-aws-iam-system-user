@@ -19,6 +19,7 @@ output "access_key_id" {
 }
 
 output "secret_access_key" {
+  sensitive   = true
   value       = "${join("", aws_iam_access_key.default.*.secret)}"
   description = "The secret access key. This will be written to the state file in plain-text"
 }
