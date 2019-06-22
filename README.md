@@ -45,10 +45,15 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 ## Usage
 
+
+**IMPORTANT:** The `master` branch is used in `source` just as an example. In your code, do not pin to `master` because there may be breaking changes between releases.
+Instead pin to the release tag (e.g. `?ref=tags/x.y.z`) of one of our [latest releases](https://github.com/cloudposse/terraform-aws-iam-system-user/releases).
+
+
 ```hcl
 module "circleci" {
   source     = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
-  namespace  = "cp"
+  namespace  = "eg"
   stage      = "circleci"
   name       = "assets"
 }
@@ -85,7 +90,7 @@ data "aws_iam_policy_document" "fluentd_user_policy" {
 
 module "fluentd_user" {
   source    = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
-  namespace = "cp"
+  namespace = "eg"
   stage     = "dev"
   name      = "fluentd"
 }
@@ -110,20 +115,19 @@ Available targets:
   lint                                Lint terraform code
 
 ```
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| attributes |  | list | `<list>` | no |
+| attributes | - | list(string) | `<list>` | no |
 | delimiter | Delimiter to be used between `name`, `namespace`, `stage`, etc. | string | `-` | no |
-| enabled | Set to false to prevent the module from creating any resources | string | `true` | no |
-| force_destroy | Destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. | string | `false` | no |
+| enabled | Set to false to prevent the module from creating any resources | bool | `true` | no |
+| force_destroy | Destroy the user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices | bool | `false` | no |
 | name | The Name of the application or solution  (e.g. `bastion` or `portal`) | string | - | yes |
-| namespace | Namespace (e.g. `cp` or `cloudposse`) | string | - | yes |
+| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | string | `` | no |
 | path | Path in which to create the user | string | `/` | no |
 | stage | Stage (e.g. `prod`, `dev`, `staging`) | string | - | yes |
-| tags | Additional tags (e.g. `map('BusinessUnit','XYZ')`) | map | `<map>` | no |
+| tags | Additional tags (e.g. `map('BusinessUnit','XYZ')`) | map(string) | `<map>` | no |
 
 ## Outputs
 
@@ -219,7 +223,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2017-2018 [Cloud Posse, LLC](https://cpco.io/copyright)
+Copyright © 2017-2019 [Cloud Posse, LLC](https://cpco.io/copyright)
 
 
 

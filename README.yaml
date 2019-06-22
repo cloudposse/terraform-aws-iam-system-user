@@ -73,7 +73,7 @@ usage: |-
   ```hcl
   module "circleci" {
     source     = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
-    namespace  = "cp"
+    namespace  = "eg"
     stage      = "circleci"
     name       = "assets"
   }
@@ -106,7 +106,7 @@ examples: |-
 
   module "fluentd_user" {
     source    = "git::https://github.com/cloudposse/terraform-aws-iam-system-user.git?ref=master"
-    namespace = "cp"
+    namespace = "eg"
     stage     = "dev"
     name      = "fluentd"
   }
