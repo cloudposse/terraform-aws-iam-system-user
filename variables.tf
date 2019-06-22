@@ -5,7 +5,6 @@ variable "name" {
 
 variable "namespace" {
   type        = string
-  default     = ""
   description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
 }
 
@@ -15,20 +14,21 @@ variable "stage" {
 }
 
 variable "attributes" {
-  type    = list(string)
-  default = []
+  type        = list(string)
+  description = "Additional attributes (e.g. `1`)"
+  default     = []
 }
 
 variable "tags" {
   type        = map(string)
-  default     = {}
   description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`)"
+  default     = {}
 }
 
 variable "delimiter" {
   type        = string
-  default     = "-"
   description = "Delimiter to be used between `name`, `namespace`, `stage`, etc."
+  default     = "-"
 }
 
 variable "force_destroy" {
