@@ -34,9 +34,9 @@ github_repo: cloudposse/terraform-aws-iam-system-user
 
 # Badges to display
 badges:
-  - name: "Build Status"
-    image: "https://travis-ci.org/cloudposse/terraform-aws-iam-system-user.svg?branch=master"
-    url: "https://travis-ci.org/cloudposse/terraform-aws-iam-system-user"
+  - name: "Codefresh Build Status"
+    image: "https://g.codefresh.io/api/badges/pipeline/cloudposse/terraform-modules%2Fterraform-aws-iam-system-user?type=cf-1"
+    url: "https://g.codefresh.io/public/accounts/cloudposse/pipelines/5d0db46dc6e7232219c081d4"
   - name: "Latest Release"
     image: "https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg"
     url: "https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest"

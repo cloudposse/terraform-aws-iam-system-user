@@ -3,7 +3,7 @@
 
 [![Cloud Posse][logo]](https://cpco.io/homepage)
 
-# terraform-aws-iam-system-user [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-iam-system-user [![Codefresh Build Status](https://g.codefresh.io/api/badges/pipeline/cloudposse/terraform-modules%2Fterraform-aws-iam-system-user?type=cf-1)](https://g.codefresh.io/public/accounts/cloudposse/pipelines/5d0db46dc6e7232219c081d4) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
 Terraform Module to provision a basic IAM system user suitable for CI/CD Systems
