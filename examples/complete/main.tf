@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 module "iam_system_user" {
   source = "../../"
 

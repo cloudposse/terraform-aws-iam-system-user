@@ -124,9 +124,9 @@ Available targets:
 | enabled | Set to false to prevent the module from creating any resources | bool | `true` | no |
 | force_destroy | Destroy the user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices | bool | `false` | no |
 | name | The Name of the application or solution  (e.g. `bastion` or `portal`) | string | - | yes |
-| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | string | - | yes |
+| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | string | `` | no |
 | path | Path in which to create the user | string | `/` | no |
-| stage | Stage (e.g. `prod`, `dev`, `staging`) | string | - | yes |
+| stage | Stage (e.g. `prod`, `dev`, `staging`) | string | `` | no |
 | tags | Additional tags (e.g. `map('BusinessUnit','XYZ')`) | map(string) | `<map>` | no |
 
 ## Outputs

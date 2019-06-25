@@ -6,11 +6,13 @@ variable "name" {
 variable "namespace" {
   type        = string
   description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
+  default     = ""
 }
 
 variable "stage" {
   type        = string
   description = "Stage (e.g. `prod`, `dev`, `staging`)"
+  default     = ""
 }
 
 variable "attributes" {
