@@ -15,6 +15,12 @@ variable "stage" {
   default     = ""
 }
 
+variable "environment" {
+  type        = string
+  default     = ""
+  description = "Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT'"
+}
+
 variable "attributes" {
   type        = list(string)
   description = "Additional attributes (e.g. `1`)"
