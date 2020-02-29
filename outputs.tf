@@ -25,7 +25,7 @@ output "secret_access_key" {
 }
 
 output "ses_smtp_password" {
-  sensitive = true
-  value = join("", aws_iam_access_key.default.*.ses_smtp_password)
+  sensitive   = true
+  value       = join("", aws_iam_access_key.default.*.ses_smtp_password)
   description = "The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm."
 }
