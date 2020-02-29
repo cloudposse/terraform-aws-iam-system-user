@@ -19,6 +19,7 @@
 |------|-------------|
 | access_key_id | The access key ID |
 | secret_access_key | The secret access key. This will be written to the state file in plain-text |
+| ses_smtp_password | The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm. |
 | user_arn | The ARN assigned by AWS for this user |
 | user_name | Normalized IAM user name |
 | user_unique_id | The unique ID assigned by AWS |

@@ -23,3 +23,9 @@ output "secret_access_key" {
   value       = join("", aws_iam_access_key.default.*.secret)
   description = "The secret access key. This will be written to the state file in plain-text"
 }
+
+output "ses_smtp_password" {
+  sensitive   = true
+  value       = join("", aws_iam_access_key.default.*.ses_smtp_password)
+  description = "The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm."
+}
