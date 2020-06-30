@@ -42,7 +42,7 @@
 
 [![Cloud Posse][logo]](https://cpco.io/homepage)
 
-# terraform-aws-iam-system-user [![Codefresh Build Status](https://g.codefresh.io/api/badges/pipeline/cloudposse/terraform-modules%2Fterraform-aws-iam-system-user?type=cf-1)](https://g.codefresh.io/public/accounts/cloudposse/pipelines/5d0db46dc6e7232219c081d4) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-iam-system-user [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
 Terraform Module to provision a basic IAM system user suitable for CI/CD Systems
@@ -154,31 +154,46 @@ Available targets:
   lint                                Lint terraform code
 
 ```
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.0 |
+| aws | ~> 2.0 |
+| local | ~> 1.2 |
+| null | ~> 2.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 2.0 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| attributes | Additional attributes (e.g. `1`) | list(string) | `<list>` | no |
-| delimiter | Delimiter to be used between `name`, `namespace`, `stage`, etc. | string | `-` | no |
-| enabled | Set to false to prevent the module from creating any resources | bool | `true` | no |
-| environment | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | string | `` | no |
-| force_destroy | Destroy the user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices | bool | `false` | no |
-| name | The Name of the application or solution  (e.g. `bastion` or `portal`) | string | - | yes |
-| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | string | `` | no |
-| path | Path in which to create the user | string | `/` | no |
-| stage | Stage (e.g. `prod`, `dev`, `staging`) | string | `` | no |
-| tags | Additional tags (e.g. `map('BusinessUnit','XYZ')`) | map(string) | `<map>` | no |
+|------|-------------|------|---------|:--------:|
+| attributes | Additional attributes (e.g. `1`) | `list(string)` | `[]` | no |
+| delimiter | Delimiter to be used between `name`, `namespace`, `stage`, etc. | `string` | `"-"` | no |
+| enabled | Set to false to prevent the module from creating any resources | `bool` | `true` | no |
+| environment | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | `string` | `""` | no |
+| force\_destroy | Destroy the user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices | `bool` | `false` | no |
+| name | The Name of the application or solution  (e.g. `bastion` or `portal`) | `string` | n/a | yes |
+| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `""` | no |
+| path | Path in which to create the user | `string` | `"/"` | no |
+| stage | Stage (e.g. `prod`, `dev`, `staging`) | `string` | `""` | no |
+| tags | Additional tags (e.g. `map('BusinessUnit','XYZ')`) | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| access_key_id | The access key ID |
-| secret_access_key | The secret access key. This will be written to the state file in plain-text |
-| ses_smtp_password | The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm. |
-| user_arn | The ARN assigned by AWS for this user |
-| user_name | Normalized IAM user name |
-| user_unique_id | The unique ID assigned by AWS |
+| access\_key\_id | The access key ID |
+| secret\_access\_key | The secret access key. This will be written to the state file in plain-text |
+| ses\_smtp\_password | The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm. |
+| user\_arn | The ARN assigned by AWS for this user |
+| user\_name | Normalized IAM user name |
+| user\_unique\_id | The unique ID assigned by AWS |
 
 
 
