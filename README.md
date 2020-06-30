@@ -190,7 +190,7 @@ Available targets:
 |------|-------------|
 | access\_key\_id | The access key ID |
 | secret\_access\_key | The secret access key. This will be written to the state file in plain-text |
-| ses\_smtp\_password | The secret access key converted into an SES SMTP password by applying AWS's documented conversion algorithm. |
+| ses\_smtp\_password\_v4 | The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
 | user\_arn | The ARN assigned by AWS for this user |
 | user\_name | Normalized IAM user name |
 | user\_unique\_id | The unique ID assigned by AWS |
