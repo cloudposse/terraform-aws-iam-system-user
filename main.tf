@@ -16,7 +16,7 @@ resource "aws_iam_user" "default" {
   name          = module.label.id
   path          = var.path
   force_destroy = var.force_destroy
-  tags          = var.tags
+  tags          = module.label.tags
 }
 
 # Generate API credentials
