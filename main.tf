@@ -34,7 +34,7 @@ locals {
   )
   policy_arns_map = merge(
     var.policy_arns_map,
-    { for i in var.policy_arns : md5(i) => i },
+    { for i in var.policy_arns : i => i },
   )
 }
 
