@@ -58,25 +58,25 @@ variable "enabled" {
 }
 
 variable "inline_policies" {
-    type        = list(string)
-    description = "Inline policies to attach to our created user"
-    default     = []
+  type        = list(string)
+  description = "Inline policies to attach to our created user"
+  default     = []
 }
 
 variable "inline_policies_map" {
-    type        = map(string)
-    description = "Inline policies to attach (descriptive key => policy)"
-    default     = {}
+  type        = map(string)
+  description = "Inline policies to attach (descriptive key => policy)"
+  default     = {}
 }
 
 variable "policy_arns" {
-    type        = list(string)
-    description = "Policy ARNs to attach to our created user"
-    default     = []
+  type        = list(string)
+  description = "Policy ARNs to attach to our created user"
+  default     = []
 }
 
 variable "policy_arns_map" {
-    type        = map(string)
-    description = "Policy ARNs to attach (descriptive key => arn)"
-    default     = {}
+  type        = map(string)
+  description = "Policy ARNs to attach (descriptive key => arn)"
+  default     = {}
 }
