@@ -10,18 +10,18 @@ resource "aws_iam_user" "default" {
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
   count = module.this.enabled ? 1 : 0
-  user  = aws_iam_user.default[0].name
+  user  = join("", aws_iam_user.default.*.name)
 }
 
 # policies -- inline and otherwise
 locals {
   inline_policies_map = merge(
     var.inline_policies_map,
-    { for i in var.inline_policies : md5(i) => i },
+    { for i in var.inline_policies : md5(i) => i }
   )
   policy_arns_map = merge(
     var.policy_arns_map,
-    { for i in var.policy_arns : i => i },
+    { for i in var.policy_arns : i => i }
   )
 }
 
