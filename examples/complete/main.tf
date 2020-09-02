@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 module "iam_system_user" {
-  source        = "../../"
-  namespace     = var.namespace
-  stage         = var.stage
-  name          = var.name
+  source = "../../"
+
   force_destroy = true
+
+  context = module.this.context
 }
