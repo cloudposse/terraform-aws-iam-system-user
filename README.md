@@ -109,7 +109,10 @@ data "aws_iam_policy_document" "s3_policy" {
       "s3:PutObjectAcl"
     ]
 
-    resources = [ "arn:aws:s3:::bucket_name/*", "arn:aws:s3:::bucket_name/" ]
+    resources = [
+      "arn:aws:s3:::bucket_name/*",
+      "arn:aws:s3:::bucket_name/"
+    ]
   }
 }
 ```
