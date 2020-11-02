@@ -95,7 +95,7 @@ module "fluentd_user" {
   }
 
   inline_policies_map = {
-    s3 = aws_iam_policy_document.s3_policy.json
+    s3 = data.aws_iam_policy_document.s3_policy.json
   }
 }
 
