@@ -36,6 +36,6 @@ variable "policy_arns_map" {
 
 variable "create_iam_access_key" {
   type        = bool
-  description = "Whether to create IAM access keys or not"
+  description = "Whether or not to create IAM access keys"
   default     = true
 }
