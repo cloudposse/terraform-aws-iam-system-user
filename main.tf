@@ -9,7 +9,7 @@ resource "aws_iam_user" "default" {
 
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
-  count = module.this.enabled ? 1 : 0
+  count = module.this.enabled && var.create_iam_access_key ? 1 : 0
   user  = join("", aws_iam_user.default.*.name)
 }
 
