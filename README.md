@@ -32,6 +32,9 @@ Terraform Module to provision a basic IAM system user suitable for CI/CD Systems
 
 We do not recommend creating IAM users this way for any other purpose.
 
+By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups and roles but not users.
+**This module intentionally attaches an IAM policy directly to the user and does not use groups**
+
 
 ---
 
@@ -170,8 +173,6 @@ Available targets:
 |------|---------|
 | terraform | >= 0.13.0 |
 | aws | >= 2.0 |
-| local | >= 1.2 |
-| null | >= 2.0 |
 
 ## Providers
 

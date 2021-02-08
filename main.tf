@@ -26,6 +26,7 @@ locals {
 }
 
 resource "aws_iam_user_policy" "inline_policies" {
+  #bridgecrew:skip=BC_AWS_IAM_16:Skipping `Ensure IAM policies are attached only to groups or roles` check because this module intentionally attaches IAM policy directly to a user.
   for_each = module.this.enabled ? local.inline_policies_map : {}
   lifecycle {
     create_before_destroy = true
@@ -36,6 +37,7 @@ resource "aws_iam_user_policy" "inline_policies" {
 }
 
 resource "aws_iam_user_policy_attachment" "policies" {
+  #bridgecrew:skip=BC_AWS_IAM_16:Skipping `Ensure IAM policies are attached only to groups or roles` check because this module intentionally attaches IAM policy directly to a user.
   for_each = module.this.enabled ? local.policy_arns_map : {}
   lifecycle {
     create_before_destroy = true
