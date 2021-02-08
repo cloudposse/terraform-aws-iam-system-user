@@ -33,3 +33,9 @@ variable "policy_arns_map" {
   description = "Policy ARNs to attach (descriptive key => arn)"
   default     = {}
 }
+
+variable "create_iam_access_key" {
+  type        = bool
+  description = "Whether or not to create IAM access keys"
+  default     = true
+}
