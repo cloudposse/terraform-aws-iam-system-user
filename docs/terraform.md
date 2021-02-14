@@ -12,6 +12,21 @@
 |------|---------|
 | aws | >= 2.0 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| this | cloudposse/label/null | 0.24.1 |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/resources/iam_access_key) |
+| [aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/resources/iam_user) |
+| [aws_iam_user_policy](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/resources/iam_user_policy) |
+| [aws_iam_user_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/resources/iam_user_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -49,5 +64,4 @@
 | user\_arn | The ARN assigned by AWS for this user |
 | user\_name | Normalized IAM user name |
 | user\_unique\_id | The unique ID assigned by AWS |
-
 <!-- markdownlint-restore -->
