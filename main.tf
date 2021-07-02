@@ -1,3 +1,7 @@
+locals {
+  username = join("", aws_iam_user.default.*.name)
+}
+
 # Defines a user that should be able to write to you test bucket
 resource "aws_iam_user" "default" {
   count         = module.this.enabled ? 1 : 0
@@ -10,7 +14,7 @@ resource "aws_iam_user" "default" {
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
   count = module.this.enabled && var.create_iam_access_key ? 1 : 0
-  user  = join("", aws_iam_user.default.*.name)
+  user  = local.username
 }
 
 # policies -- inline and otherwise
@@ -32,7 +36,7 @@ resource "aws_iam_user_policy" "inline_policies" {
     create_before_destroy = true
   }
   name_prefix = module.this.id
-  user        = join("", aws_iam_user.default.*.name)
+  user        = local.username
   policy      = each.value
 }
 
@@ -42,6 +46,32 @@ resource "aws_iam_user_policy_attachment" "policies" {
   lifecycle {
     create_before_destroy = true
   }
-  user       = join("", aws_iam_user.default.*.name)
+  user       = local.username
   policy_arn = each.value
+}
+
+module "store_write" {
+  source  = "cloudposse/ssm-parameter-store/aws"
+  version = "0.8.0"
+
+  count = module.this.enabled ? 1 : 0
+
+  parameter_write = [
+    {
+      name        = "/system_user/${local.username}/access_key_id"
+      value       = join("", aws_iam_access_key.default.*.id)
+      type        = "SecureString"
+      overwrite   = true
+      description = "The AWS_ACCESS_KEY_ID for the ${local.username} user."
+    },
+    {
+      name        = "/system_user/${local.username}/secret_access_key"
+      value       = join("", aws_iam_access_key.default.*.secret)
+      type        = "SecureString"
+      overwrite   = true
+      description = "The AWS_SECRET_ACCESS_KEY for the ${local.username} user."
+    }
+  ]
+
+  context = module.this.context
 }
