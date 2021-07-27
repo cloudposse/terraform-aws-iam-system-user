@@ -1,10 +1,10 @@
 # Defines a user that should be able to write to you test bucket
 resource "aws_iam_user" "default" {
-  count         = module.this.enabled ? 1 : 0
-  name          = module.this.id
-  path          = var.path
-  force_destroy = var.force_destroy
-  tags          = module.this.tags
+  count                = module.this.enabled ? 1 : 0
+  name                 = module.this.id
+  path                 = var.path
+  force_destroy        = var.force_destroy
+  tags                 = module.this.tags
   permissions_boundary = var.permissions_boundary
 }
 
