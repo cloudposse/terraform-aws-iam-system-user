@@ -54,7 +54,7 @@ module "store_write" {
   source  = "cloudposse/ssm-parameter-store/aws"
   version = "0.8.0"
 
-  count = module.this.enabled ? 1 : 0
+  count = module.this.enabled && var.write_keys_to_ssm_enabled ? 1 : 0
 
   parameter_write = [
     {
