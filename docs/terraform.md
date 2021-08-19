@@ -54,10 +54,7 @@
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `map('BusinessUnit','XYZ')` | `map(string)` | `{}` | no |
-<<<<<<< HEAD
 | <a name="input_write_keys_to_ssm_enabled"></a> [write\_keys\_to\_ssm\_enabled](#input\_write\_keys\_to\_ssm\_enabled) | Whether or not to write the IAM access key and secret key to SSM Parameter Store | `bool` | `true` | no |
-=======
->>>>>>> f097c1e516aa365f6386126965003b162156fe60
 
 ## Outputs
 
