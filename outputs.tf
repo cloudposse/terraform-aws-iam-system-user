@@ -1,5 +1,5 @@
 output "user_name" {
-  value       = join("", aws_iam_user.default.*.name)
+  value       = local.username
   description = "Normalized IAM user name"
 }
 

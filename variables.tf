@@ -39,3 +39,9 @@ variable "create_iam_access_key" {
   description = "Whether or not to create IAM access keys"
   default     = true
 }
+
+variable "ssm_enabled" {
+  type        = bool
+  description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
+  default     = true
+}
