@@ -40,7 +40,7 @@ variable "create_iam_access_key" {
   default     = true
 }
 
-variable "write_keys_to_ssm_enabled" {
+variable "ssm_enabled" {
   type        = bool
   description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
   default     = true
