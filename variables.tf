@@ -34,6 +34,12 @@ variable "policy_arns_map" {
   default     = {}
 }
 
+variable "permissions_boundary" {
+  type        = string
+  description = "Permissions Boundary ARN to attach to our created user"
+  default     = null
+}
+
 variable "create_iam_access_key" {
   type        = bool
   description = "Whether or not to create IAM access keys"
