@@ -53,7 +53,7 @@ resource "aws_iam_user_policy_attachment" "policies" {
 
 module "store_write" {
   source  = "cloudposse/ssm-parameter-store/aws"
-  version = "0.8.2"
+  version = "0.8.3"
 
   count = module.this.enabled && var.ssm_enabled && var.create_iam_access_key ? 1 : 0
 
