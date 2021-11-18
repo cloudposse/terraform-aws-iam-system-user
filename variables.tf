@@ -55,7 +55,6 @@ variable "iam_access_key_max_age" {
     condition     = var.iam_access_key_max_age >= 0
     error_message = "The iam_access_key_max_age must be 0 (disabled) or greater."
   }
-
 }
 
 variable "ssm_enabled" {
