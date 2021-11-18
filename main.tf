@@ -1,5 +1,8 @@
 locals {
-  username = join("", aws_iam_user.default.*.name)
+  username                   = join("", aws_iam_user.default.*.name)
+  create_regular_access_key  = var.create_iam_access_key && var.iam_access_key_max_age == 0
+  create_expiring_access_key = var.create_iam_access_key && var.iam_access_key_max_age > 0
+  access_key                 = var.create_iam_access_key ? (local.create_regular_access_key ? aws_iam_access_key.default : awsutils_expiring_iam_access_key.default) : null
 }
 
 # Defines a user that should be able to write to you test bucket
@@ -14,8 +17,14 @@ resource "aws_iam_user" "default" {
 
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
-  count = module.this.enabled && var.create_iam_access_key ? 1 : 0
+  count = module.this.enabled && local.create_regular_access_key ? 1 : 0
   user  = local.username
+}
+
+resource "awsutils_expiring_iam_access_key" "default" {
+  count   = module.this.enabled && local.create_expiring_access_key ? 1 : 0
+  user    = local.username
+  max_age = var.iam_access_key_max_age
 }
 
 # policies -- inline and otherwise
@@ -60,14 +69,14 @@ module "store_write" {
   parameter_write = [
     {
       name        = "/system_user/${local.username}/access_key_id"
-      value       = join("", aws_iam_access_key.default.*.id)
+      value       = join("", local.access_key.*.id)
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_ACCESS_KEY_ID for the ${local.username} user."
     },
     {
       name        = "/system_user/${local.username}/secret_access_key"
-      value       = join("", aws_iam_access_key.default.*.secret)
+      value       = join("", local.access_key.*.secret)
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_SECRET_ACCESS_KEY for the ${local.username} user."
