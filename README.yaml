@@ -43,7 +43,9 @@ badges:
 
 related:
   - name: "terraform-aws-iam-s3-user"
-    description: "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user read/write/delete access to the objects in an S3 bucket"
+    description:
+      "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user
+      read/write/delete access to the objects in an S3 bucket"
     url: "https://github.com/cloudposse/terraform-aws-iam-s3-user"
   - name: "terraform-aws-iam-assumed-roles"
     description: "Terraform Module for Assumed Roles on AWS with IAM Groups Requiring MFA"
@@ -52,10 +54,15 @@ related:
     description: "Terraform module to provision an IAM role with configurable permissions to access SSM Parameter Store"
     url: "https://github.com/cloudposse/terraform-aws-ssm-iam-role"
   - name: "terraform-aws-iam-chamber-user"
-    description: "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that cannot leverage AWS IAM Instance Profiles"
+    description:
+      "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt
+      secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that
+      cannot leverage AWS IAM Instance Profiles"
     url: "https://github.com/cloudposse/terraform-aws-iam-chamber-user"
   - name: "terraform-aws-lb-s3-bucket"
-    description: "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access logs"
+    description:
+      "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access
+      logs"
     url: "https://github.com/cloudposse/terraform-aws-lb-s3-bucket"
 
 # Short description of this project
@@ -136,3 +143,5 @@ contributors:
     github: "comeanother"
   - name: "Chris Weyl"
     github: "rsrchboy"
+  - name: "Matt Calhoun"
+    github: "mcalhoun"

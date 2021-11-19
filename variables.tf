@@ -46,6 +46,17 @@ variable "create_iam_access_key" {
   default     = true
 }
 
+variable "iam_access_key_max_age" {
+  type        = number
+  description = "Maximum age of IAM access key (seconds). Defaults to 30 days. Set to 0 to disable expiration."
+  default     = 2592000
+
+  validation {
+    condition     = var.iam_access_key_max_age >= 0
+    error_message = "The iam_access_key_max_age must be 0 (disabled) or greater."
+  }
+}
+
 variable "ssm_enabled" {
   type        = bool
   description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
