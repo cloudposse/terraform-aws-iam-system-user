@@ -62,3 +62,9 @@ variable "ssm_enabled" {
   description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
   default     = true
 }
+
+variable "ssm_base_path" {
+  type        = string
+  description = "The base path for SSM parameters"
+  default     = "/system_user"
+}
