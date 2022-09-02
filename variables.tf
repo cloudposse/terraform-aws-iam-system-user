@@ -62,3 +62,15 @@ variable "ssm_enabled" {
   description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
   default     = true
 }
+
+variable "ssm_ses_smtp_password_enabled" {
+  type        = bool
+  description = "Whether or not to write the SES SMTP password to SSM Parameter Store"
+  default     = false
+}
+
+variable "ssm_base_path" {
+  type        = string
+  description = "The base path for SSM parameters"
+  default     = "/system_user/"
+}

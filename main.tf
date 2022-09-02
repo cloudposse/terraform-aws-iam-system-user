@@ -66,22 +66,29 @@ module "store_write" {
 
   count = module.this.enabled && var.ssm_enabled && var.create_iam_access_key ? 1 : 0
 
-  parameter_write = [
+  parameter_write = concat([
     {
-      name        = "/system_user/${local.username}/access_key_id"
+      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/access_key_id"
       value       = join("", local.access_key.*.id)
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_ACCESS_KEY_ID for the ${local.username} user."
     },
     {
-      name        = "/system_user/${local.username}/secret_access_key"
+      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/secret_access_key"
       value       = join("", local.access_key.*.secret)
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_SECRET_ACCESS_KEY for the ${local.username} user."
-    }
-  ]
+    }], var.ssm_ses_smtp_password_enabled ? [
+    {
+      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/ses_smtp_password_v4"
+      value       = join("", compact(local.access_key.*.ses_smtp_password_v4))
+      type        = "SecureString"
+      overwrite   = true
+      description = "The AWS_SECRET_ACCESS_KEY converted into an SES SMTP password for the ${local.username} user."
+    }] : []
+  )
 
   context = module.this.context
 }
