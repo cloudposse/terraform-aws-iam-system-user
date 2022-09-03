@@ -64,16 +64,29 @@ related:
       "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access
       logs"
     url: "https://github.com/cloudposse/terraform-aws-lb-s3-bucket"
+  - name: "terraform-null-label"
+    description: "Terraform Module to implement a consistent naming convention"
+    url: "https://github.com/cloudposse/terraform-null-label"
 
 # Short description of this project
 description: |-
   Terraform Module to provision a basic IAM system user suitable for CI/CD Systems
-  (_e.g._ TravisCI, CircleCI) or systems which are *external* to AWS that cannot leverage [AWS IAM Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html).
+  (_e.g._ TravisCI, CircleCI) or systems which are *external* to AWS that cannot leverage [AWS IAM Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+  or [AWS OIDC](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html).
 
   We do not recommend creating IAM users this way for any other purpose.
 
   By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups and roles but not users.
   **This module intentionally attaches an IAM policy directly to the user and does not use groups**
+  
+  The IAM user name is constructed using [terraform-null-label](https://github.com/cloudposse/terraform-null-label)
+  and some input is required. The simplest input is `name`. By default the name will be converted to lower case
+  and all non-alphanumeric characters except for hyphen will be removed. See the documentation for `terraform-null-label`
+  to learn how to override these defaults if desired.
+  
+  If an AWS Access Key is created, it is stored either in SSM Parameter Store or is provided as a module output,
+  but not both. Using SSM Parameter Store is recommended because module outputs are stored in plaintext in
+  the Terraform state file.
 
 # How to use this project
 usage: |-

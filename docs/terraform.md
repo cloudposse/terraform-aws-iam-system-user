@@ -5,20 +5,18 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.0 |
-| <a name="requirement_awsutils"></a> [awsutils](#requirement\_awsutils) | >= 0.11 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.0 |
-| <a name="provider_awsutils"></a> [awsutils](#provider\_awsutils) | >= 0.11 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_store_write"></a> [store\_write](#module\_store\_write) | cloudposse/ssm-parameter-store/aws | 0.9.1 |
+| <a name="module_store_write"></a> [store\_write](#module\_store\_write) | cloudposse/ssm-parameter-store/aws | 0.10.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
@@ -29,7 +27,6 @@
 | [aws_iam_user.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_policy.inline_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy_attachment.policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
-| [awsutils_expiring_iam_access_key.default](https://registry.terraform.io/providers/cloudposse/awsutils/latest/docs/resources/expiring_iam_access_key) | resource |
 
 ## Inputs
 
@@ -44,7 +41,6 @@
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | Destroy the user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices | `bool` | `false` | no |
-| <a name="input_iam_access_key_max_age"></a> [iam\_access\_key\_max\_age](#input\_iam\_access\_key\_max\_age) | Maximum age of IAM access key (seconds). Defaults to 30 days. Set to 0 to disable expiration. | `number` | `2592000` | no |
 | <a name="input_id_length_limit"></a> [id\_length\_limit](#input\_id\_length\_limit) | Limit `id` to this many characters (minimum 6).<br>Set to `0` for unlimited length.<br>Set to `null` for keep the existing setting, which defaults to `0`.<br>Does not affect `id_full`. | `number` | `null` | no |
 | <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | Inline policies to attach to our created user | `list(string)` | `[]` | no |
 | <a name="input_inline_policies_map"></a> [inline\_policies\_map](#input\_inline\_policies\_map) | Inline policies to attach (descriptive key => policy) | `map(string)` | `{}` | no |
@@ -59,9 +55,9 @@
 | <a name="input_policy_arns"></a> [policy\_arns](#input\_policy\_arns) | Policy ARNs to attach to our created user | `list(string)` | `[]` | no |
 | <a name="input_policy_arns_map"></a> [policy\_arns\_map](#input\_policy\_arns\_map) | Policy ARNs to attach (descriptive key => arn) | `map(string)` | `{}` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
-| <a name="input_ssm_base_path"></a> [ssm\_base\_path](#input\_ssm\_base\_path) | The base path for SSM parameters | `string` | `"/system_user/"` | no |
-| <a name="input_ssm_enabled"></a> [ssm\_enabled](#input\_ssm\_enabled) | Whether or not to write the IAM access key and secret key to SSM Parameter Store | `bool` | `true` | no |
-| <a name="input_ssm_ses_smtp_password_enabled"></a> [ssm\_ses\_smtp\_password\_enabled](#input\_ssm\_ses\_smtp\_password\_enabled) | Whether or not to write the SES SMTP password to SSM Parameter Store | `bool` | `false` | no |
+| <a name="input_ssm_base_path"></a> [ssm\_base\_path](#input\_ssm\_base\_path) | The base path for SSM parameters where secrets are stored | `string` | `"/system_user/"` | no |
+| <a name="input_ssm_enabled"></a> [ssm\_enabled](#input\_ssm\_enabled) | Set `true` to store secrets in SSM Parameter Store, `<br>false` to store secrets in Terraform state as outputs.<br>Since Terraform state would contain the secrets in plain text,<br>use of SSM Parameter Store is recommended. | `bool` | `true` | no |
+| <a name="input_ssm_ses_smtp_password_enabled"></a> [ssm\_ses\_smtp\_password\_enabled](#input\_ssm\_ses\_smtp\_password\_enabled) | Whether or not to create an SES SMTP password | `bool` | `false` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
@@ -71,8 +67,12 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_access_key_id"></a> [access\_key\_id](#output\_access\_key\_id) | The access key ID |
-| <a name="output_secret_access_key"></a> [secret\_access\_key](#output\_secret\_access\_key) | The secret access key. This will be written to the state file in plain-text |
-| <a name="output_ses_smtp_password_v4"></a> [ses\_smtp\_password\_v4](#output\_ses\_smtp\_password\_v4) | The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
+| <a name="output_access_key_id_ssm_path"></a> [access\_key\_id\_ssm\_path](#output\_access\_key\_id\_ssm\_path) | The SSM Path under which the IAM User's access key ID is stored |
+| <a name="output_secret_access_key"></a> [secret\_access\_key](#output\_secret\_access\_key) | When `ssm_enabled` is `false`, this is the secret access key for the IAM user.<br>This will be written to the state file in plain-text.<br>When `ssm_enabled` is `true`, this output will be empty to keep the value secure. |
+| <a name="output_secret_access_key_ssm_path"></a> [secret\_access\_key\_ssm\_path](#output\_secret\_access\_key\_ssm\_path) | The SSM Path under which the IAM User's secret access key is stored |
+| <a name="output_ses_smtp_password_v4"></a> [ses\_smtp\_password\_v4](#output\_ses\_smtp\_password\_v4) | When `ssm_enabled` is false, this is the secret access key converted into an SES SMTP password<br>by applying AWS's Sigv4 conversion algorithm. It will be written to the Terraform state file in plain text.<br>When `ssm_enabled` is `true`, this output will be empty to keep the value secure. |
+| <a name="output_ses_smtp_password_v4_ssm_path"></a> [ses\_smtp\_password\_v4\_ssm\_path](#output\_ses\_smtp\_password\_v4\_ssm\_path) | The SSM Path under which the IAM User's SES SMTP password is stored |
+| <a name="output_ssm_enabled"></a> [ssm\_enabled](#output\_ssm\_enabled) | `true` when secrets are stored in SSM Parameter store,<br>`false` when secrets are stored in Terraform state as outputs. |
 | <a name="output_user_arn"></a> [user\_arn](#output\_user\_arn) | The ARN assigned by AWS for this user |
 | <a name="output_user_name"></a> [user\_name](#output\_user\_name) | Normalized IAM user name |
 | <a name="output_user_unique_id"></a> [user\_unique\_id](#output\_user\_unique\_id) | The unique ID assigned by AWS |

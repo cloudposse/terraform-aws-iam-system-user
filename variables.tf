@@ -46,31 +46,25 @@ variable "create_iam_access_key" {
   default     = true
 }
 
-variable "iam_access_key_max_age" {
-  type        = number
-  description = "Maximum age of IAM access key (seconds). Defaults to 30 days. Set to 0 to disable expiration."
-  default     = 2592000
-
-  validation {
-    condition     = var.iam_access_key_max_age >= 0
-    error_message = "The iam_access_key_max_age must be 0 (disabled) or greater."
-  }
-}
-
 variable "ssm_enabled" {
   type        = bool
-  description = "Whether or not to write the IAM access key and secret key to SSM Parameter Store"
+  description = <<-EOT
+    Set `true` to store secrets in SSM Parameter Store, `
+    false` to store secrets in Terraform state as outputs.
+    Since Terraform state would contain the secrets in plain text,
+    use of SSM Parameter Store is recommended.
+    EOT
   default     = true
 }
 
 variable "ssm_ses_smtp_password_enabled" {
   type        = bool
-  description = "Whether or not to write the SES SMTP password to SSM Parameter Store"
+  description = "Whether or not to create an SES SMTP password"
   default     = false
 }
 
 variable "ssm_base_path" {
   type        = string
-  description = "The base path for SSM parameters"
+  description = "The base path for SSM parameters where secrets are stored"
   default     = "/system_user/"
 }

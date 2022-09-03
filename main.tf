@@ -1,13 +1,18 @@
 locals {
-  username                   = join("", aws_iam_user.default.*.name)
-  create_regular_access_key  = var.create_iam_access_key && var.iam_access_key_max_age == 0
-  create_expiring_access_key = var.create_iam_access_key && var.iam_access_key_max_age > 0
-  access_key                 = var.create_iam_access_key ? (local.create_regular_access_key ? aws_iam_access_key.default : awsutils_expiring_iam_access_key.default) : null
+  enabled = module.this.enabled
+
+  username              = join("", aws_iam_user.default.*.name)
+  create_iam_access_key = local.enabled && var.create_iam_access_key
+  ssm_enabled           = var.ssm_enabled && local.create_iam_access_key
+
+  key_id_ssm_path        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/access_key_id"
+  secret_ssm_path        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/secret_access_key"
+  smtp_password_ssm_path = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/ses_smtp_password_v4"
 }
 
 # Defines a user that should be able to write to you test bucket
 resource "aws_iam_user" "default" {
-  count                = module.this.enabled ? 1 : 0
+  count                = local.enabled ? 1 : 0
   name                 = module.this.id
   path                 = var.path
   force_destroy        = var.force_destroy
@@ -17,14 +22,8 @@ resource "aws_iam_user" "default" {
 
 # Generate API credentials
 resource "aws_iam_access_key" "default" {
-  count = module.this.enabled && local.create_regular_access_key ? 1 : 0
+  count = local.create_iam_access_key ? 1 : 0
   user  = local.username
-}
-
-resource "awsutils_expiring_iam_access_key" "default" {
-  count   = module.this.enabled && local.create_expiring_access_key ? 1 : 0
-  user    = local.username
-  max_age = var.iam_access_key_max_age
 }
 
 # policies -- inline and otherwise
@@ -62,28 +61,28 @@ resource "aws_iam_user_policy_attachment" "policies" {
 
 module "store_write" {
   source  = "cloudposse/ssm-parameter-store/aws"
-  version = "0.9.1"
+  version = "0.10.0"
 
-  count = module.this.enabled && var.ssm_enabled && var.create_iam_access_key ? 1 : 0
+  count = local.ssm_enabled ? 1 : 0
 
   parameter_write = concat([
     {
-      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/access_key_id"
-      value       = join("", local.access_key.*.id)
+      name        = local.key_id_ssm_path
+      value       = aws_iam_access_key.default[0].id
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_ACCESS_KEY_ID for the ${local.username} user."
     },
     {
-      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/secret_access_key"
-      value       = join("", local.access_key.*.secret)
+      name        = local.secret_ssm_path
+      value       = aws_iam_access_key.default[0].secret
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_SECRET_ACCESS_KEY for the ${local.username} user."
     }], var.ssm_ses_smtp_password_enabled ? [
     {
-      name        = "${trimsuffix(var.ssm_base_path, "/")}/${local.username}/ses_smtp_password_v4"
-      value       = join("", compact(local.access_key.*.ses_smtp_password_v4))
+      name        = local.smtp_password_ssm_path
+      value       = aws_iam_access_key.default[0].ses_smtp_password_v4
       type        = "SecureString"
       overwrite   = true
       description = "The AWS_SECRET_ACCESS_KEY converted into an SES SMTP password for the ${local.username} user."
