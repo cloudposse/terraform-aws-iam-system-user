@@ -51,7 +51,7 @@ variable "ssm_enabled" {
   description = <<-EOT
     Set `true` to store secrets in SSM Parameter Store, `
     false` to store secrets in Terraform state as outputs.
-    Since Terraform state would contain the secrets in plain text,
+    Since Terraform state would contain the secrets in plaintext,
     use of SSM Parameter Store is recommended.
     EOT
   default     = true

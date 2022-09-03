@@ -58,7 +58,6 @@ func AssertSSMParameterEmpty(t *testing.T, ssmClient *ssm.Client, output map[str
 	if assert.Nil(t, err, "Unable to retrieve "+ssmPathOutput+" from SSM Parameter Store") {
 		assert.Empty(t, aws.ToString(param.Parameter.Value), "Found non-empty value for "+ssmPathOutput)
 	}
-
 }
 
 func AssertSSMParameterNotEmpty(t *testing.T, ssmClient *ssm.Client, output map[string]interface{}, ssmPathOutput string) {
