@@ -38,7 +38,7 @@ output "secret_access_key" {
 
 output "ses_smtp_password_v4" {
   sensitive   = true
-  value       = local.ssm_enabled ? null : join("", aws_iam_access_key.default.*.ses_smtp_password_v4)
+  value       = local.ssm_enabled ? null : join("", compact(aws_iam_access_key.default.*.ses_smtp_password_v4))
   description = <<-EOT
     When `ssm_enabled` is false, this is the secret access key converted into an SES SMTP password
     by applying AWS's Sigv4 conversion algorithm. It will be written to the Terraform state file in plaintext.
