@@ -59,6 +59,12 @@ resource "aws_iam_user_policy_attachment" "policies" {
   policy_arn = each.value
 }
 
+resource "aws_iam_user_group_membership" "default" {
+  count  = module.this.enabled && length(var.groups) > 0 ? 1 : 0
+  user   = local.username
+  groups = var.groups
+}
+
 module "store_write" {
   source  = "cloudposse/ssm-parameter-store/aws"
   version = "0.10.0"

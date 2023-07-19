@@ -68,3 +68,9 @@ variable "ssm_base_path" {
   description = "The base path for SSM parameters where secrets are stored"
   default     = "/system_user/"
 }
+
+variable "groups" {
+  type        = list(string)
+  description = "List of IAM user groups this user should belong to in the account"
+  default     = []
+}
