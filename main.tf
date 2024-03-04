@@ -67,7 +67,7 @@ resource "aws_iam_user_group_membership" "default" {
 
 module "store_write" {
   source  = "cloudposse/ssm-parameter-store/aws"
-  version = "0.10.0"
+  version = "0.13.0"
 
   count = local.ssm_enabled ? 1 : 0
 
