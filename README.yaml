@@ -1,4 +1,3 @@
----
 #
 # This is the canonical configuration for the `README.md`
 # Run `make readme` to rebuild the `README.md`
@@ -34,18 +33,20 @@ github_repo: cloudposse/terraform-aws-iam-system-user
 
 # Badges to display
 badges:
-  - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg"
-    url: "https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest"
-  - name: "Slack Community"
-    image: "https://slack.cloudposse.com/badge.svg"
-    url: "https://slack.cloudposse.com"
+  - name: Latest Release
+    image: https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest
+  - name: Last Updated
+    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-iam-system-user.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-iam-system-user/commits
+  - name: Slack Community
+    image: https://slack.cloudposse.com/for-the-badge.svg
+    url: https://slack.cloudposse.com
 
+# List any related terraform modules that this module may be used with or that this module depends on.
 related:
   - name: "terraform-aws-iam-s3-user"
-    description:
-      "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user
-      read/write/delete access to the objects in an S3 bucket"
+    description: "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user read/write/delete access to the objects in an S3 bucket"
     url: "https://github.com/cloudposse/terraform-aws-iam-s3-user"
   - name: "terraform-aws-iam-assumed-roles"
     description: "Terraform Module for Assumed Roles on AWS with IAM Groups Requiring MFA"
@@ -54,15 +55,10 @@ related:
     description: "Terraform module to provision an IAM role with configurable permissions to access SSM Parameter Store"
     url: "https://github.com/cloudposse/terraform-aws-ssm-iam-role"
   - name: "terraform-aws-iam-chamber-user"
-    description:
-      "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt
-      secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that
-      cannot leverage AWS IAM Instance Profiles"
+    description: "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that cannot leverage AWS IAM Instance Profiles"
     url: "https://github.com/cloudposse/terraform-aws-iam-chamber-user"
   - name: "terraform-aws-lb-s3-bucket"
-    description:
-      "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access
-      logs"
+    description: "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access logs"
     url: "https://github.com/cloudposse/terraform-aws-lb-s3-bucket"
   - name: "terraform-null-label"
     description: "Terraform Module to implement a consistent naming convention"
@@ -78,12 +74,12 @@ description: |-
 
   By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups and roles but not users.
   **This module intentionally attaches an IAM policy directly to the user and does not use groups**
-  
+
   The IAM user name is constructed using [terraform-null-label](https://github.com/cloudposse/terraform-null-label)
   and some input is required. The simplest input is `name`. By default the name will be converted to lower case
   and all non-alphanumeric characters except for hyphen will be removed. See the documentation for `terraform-null-label`
   to learn how to override these defaults if desired.
-  
+
   If an AWS Access Key is created, it is stored either in SSM Parameter Store or is provided as a module output,
   but not both. Using SSM Parameter Store is recommended because module outputs are stored in plaintext in
   the Terraform state file.
@@ -143,18 +139,4 @@ include:
   - "docs/terraform.md"
 
 # Contributors to this project
-contributors:
-  - name: "Erik Osterman"
-    github: "osterman"
-  - name: "Igor Rodionov"
-    github: "goruha"
-  - name: "Andriy Knysh"
-    github: "aknysh"
-  - name: "Vladimir"
-    github: "SweetOps"
-  - name: "Konstantin B"
-    github: "comeanother"
-  - name: "Chris Weyl"
-    github: "rsrchboy"
-  - name: "Matt Calhoun"
-    github: "mcalhoun"
+contributors: []
