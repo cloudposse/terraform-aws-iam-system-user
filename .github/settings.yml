@@ -1,0 +1,7 @@
+# Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
+_extends: .github
+repository:
+  name: terraform-aws-iam-system-user
+  description: Terraform Module to Provision a Basic IAM System User Suitable for CI/CD Systems (E.g. TravisCI, CircleCI)
+  homepage: https://cloudposse.com/accelerate
+  topics: terraform, iam, provision, circleci, terraform-modules, terraform-module, aws, iam-users, cicd, hcl2
